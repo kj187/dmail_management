@@ -46,7 +46,6 @@ class AccountManagementController extends ActionController {
 
 	/**
 	 * @var SubscriberRepository
-	 * @inject
 	 */
 	protected $subscriberRepository = NULL;
 
@@ -69,6 +68,7 @@ class AccountManagementController extends ActionController {
 	protected function initializeAction() {
 		$this->persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
 		$this->querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+		$this->subscriberRepository = $this->objectManager->get('Aijko\\DmailManagement\\Domain\\Repository\\SubscriberRepository');
 		$this->querySettings->setStoragePageIds(array($this->settings['persistence']['storagePid']));
 		$this->subscriberRepository->setDefaultQuerySettings($this->querySettings);
 	}
