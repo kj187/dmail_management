@@ -1,0 +1,28 @@
+{namespace vhs = FluidTYPO3\Vhs\ViewHelpers}
+<f:render section="main" arguments="{_all}"/>
+
+<f:section name="main">Guten Tag{f:render(section: 'salutation', arguments: {subscriber: subscriber})},
+
+vielen Dank für Ihr Interesse an unserem Newsletter. Um die Anmeldung
+abzuschließen und unseren regelmäßigen Newsletter zu erhalten, klicken Sie
+bitte in den nächsten 24h auf den nachfolgenden Bestätigungslink:
+
+{f:uri.action(controller: 'AccountManagement', action: 'activate', extensionName: 'dmailmanagement', pluginName: 'Accountmanagement', noCacheHash: 1, absolute: 1, arguments: {authCode: authCode, subscriber: subscriber})}
+
+Sollte der Klick auf den Link nicht funktionieren, können Sie auch einfach
+den Link aus der E-Mail kopieren und ihn in die Adresszeile Ihres Browsers
+einfügen.
+
+Falls Sie diese E-Mail versehentlich erhalten haben, löschen Sie sie einfach.
+Sie werden nicht in unseren Verteiler eingetragen, wenn Sie nicht auf den
+Bestätigungslink klicken.
+
+Für Fragen zum Newsletter wenden Sie sich bitte an:
+
+XXX
+
+Es grüßt Sie
+XXX
+</f:section>
+
+<f:section name="salutation"><f:if condition="{subscriber.firstName}"> {subscriber.firstName}</f:if><f:if condition="{subscriber.lastName}"> {subscriber.lastName}</f:if></f:section>

@@ -1,0 +1,65 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>Function</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<switchableControllerActions>
+						<TCEforms>
+							<label>Select function</label>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="1">
+										<numIndex index="0">Subscription</numIndex>
+										<numIndex index="1">AccountManagement->subscription;AccountManagement->create;AccountManagement->activate</numIndex>
+									</numIndex>
+									<numIndex index="2">
+										<numIndex index="0">Unsubscription</numIndex>
+										<numIndex index="1">AccountManagement->unsubscribe</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</switchableControllerActions>
+					<settings.preText>
+						<TCEforms>
+							<label>Pre Text</label>
+							<displayCond>FIELD:switchableControllerActions:=:AccountManagement->subscription;AccountManagement->create;AccountManagement->activate</displayCond>
+							<config>
+								<type>text</type>
+								<cols>40</cols>
+								<rows>10</rows>
+								<wrap>virtual</wrap>
+							</config>
+							<defaultExtras>
+								richtext:rte_transform[flag=rte_enabled|mode=ts_css]
+							</defaultExtras>
+						</TCEforms>
+					</settings.preText>
+					<settings.appendText>
+						<TCEforms>
+							<label>Append Text</label>
+							<displayCond>FIELD:switchableControllerActions:=:AccountManagement->subscription;AccountManagement->create;AccountManagement->activate</displayCond>
+							<config>
+								<type>text</type>
+								<cols>40</cols>
+								<rows>10</rows>
+								<wrap>virtual</wrap>
+							</config>
+							<defaultExtras>
+								richtext:rte_transform[flag=rte_enabled|mode=ts_css]
+							</defaultExtras>
+						</TCEforms>
+					</settings.appendText>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

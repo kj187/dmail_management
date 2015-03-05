@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-03-02T16:02:42Z" product-name="dmail_management">
+		<header/>
+		<body>
+			<trans-unit id="error.email_invalid">
+				<source>Please add a valid email address</source>
+			</trans-unit>
+			<trans-unit id="error.email_stillavailable">
+				<source>Email address is still available</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,15 @@
+{namespace vhs = FluidTYPO3\Vhs\ViewHelpers}
+
+{settings.preText -> f:format.html(parseFuncTSPath: 'lib.parseFunc_RTE')}
+
+<f:form action="create" name="subscriber" object="{subscriber}" class="form form-newsletter-subscribe">
+    <div class="form-group">
+        <label for="email" class="form-label">E-Mail <span class="required">*</span></label>
+        <f:form.textfield property="email" id="email" class="form-control" />
+        <f:if condition="{error.email_invalid}"><div class="message message-error"><f:translate id="error.email_invalid" /></div></f:if>
+        <f:if condition="{error.email_stillavailable}"><div class="message message-error"><f:translate id="error.email_stillavailable" /></div></f:if>
+    </div>
+    <div class="form-group">
+        <f:form.submit class="btn-ci-lg-light" value="Newsletter abbestellen" />
+    </div>
+</f:form>

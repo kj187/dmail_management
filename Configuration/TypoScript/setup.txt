@@ -1,0 +1,67 @@
+
+	plugin.tx_dmailmanagement {
+
+		view {
+			templateRootPaths {
+				0 = EXT:dmail_management/Resources/Private/Templates/
+			}
+			partialRootPaths {
+				0 = EXT:dmail_management/Resources/Private/Partials/
+			}
+			layoutRootPaths {
+				0 = EXT:dmail_management/Resources/Private/Layouts/
+			}
+		}
+
+		persistence {
+			storagePid = {$plugin.tx_dmailmanagement.persistence.storagePid}
+		}
+
+		settings {
+			view < plugin.tx_dmailmanagement.view
+			persistence < plugin.tx_dmailmanagement.persistence
+
+			subscription {
+				confirmation {
+					redirectPage = {$plugin.tx_dmailmanagement.settings.subscription.confirmation.redirectPage}
+					mail {
+						subject = {$plugin.tx_dmailmanagement.settings.subscription.confirmation.mail.subject}
+						fromEmail = {$plugin.tx_dmailmanagement.settings.subscription.confirmation.mail.fromEmail}
+						fromName = {$plugin.tx_dmailmanagement.settings.subscription.confirmation.mail.fromName}
+					}
+				}
+				activation {
+					redirectPage = {$plugin.tx_dmailmanagement.settings.subscription.activation.redirectPage}
+				}
+			}
+
+			unsubscription {
+				confirmation {
+					redirectPage = {$plugin.tx_dmailmanagement.settings.unsubscription.confirmation.redirectPage}
+				}
+			}
+		}
+	}
+
+	config.tx_extbase {
+		objects {
+			TYPO3\TtAddress\Domain\Model\Address {
+				className = Aijko\DmailManagement\Domain\Model\Subscriber
+			}
+			TYPO3\TtAddress\Domain\Repository\AddressRepository {
+				className = Aijko\DmailManagement\Domain\Repository\SubscriberRepository
+			}
+		}
+	}
+
+	config.tx_extbase {
+		persistence {
+			classes {
+				Aijko\DmailManagement\Domain\Model\Subscriber {
+					mapping {
+						tableName = tt_address
+					}
+				}
+			}
+		}
+	}

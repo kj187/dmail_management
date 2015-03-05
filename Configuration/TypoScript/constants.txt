@@ -1,0 +1,30 @@
+
+	plugin.tx_dmailmanagement {
+
+		persistence {
+			storagePid =
+		}
+
+		settings {
+
+			subscription {
+				confirmation {
+					redirectPage =
+					mail {
+						subject =
+						fromEmail =
+						fromName =
+					}
+				}
+				activation {
+					redirectPage =
+				}
+			}
+
+			unsubscription {
+				confirmation {
+					redirectPage =
+				}
+			}
+		}
+	}
