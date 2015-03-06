@@ -43,3 +43,57 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignat
 
 // Add static typoscript
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'DirectMail Management');
+
+// tt_address modified
+$tt_address_cols = array(
+	'clientip' => array(
+		'label' => 'LLL:EXT:dmail_management/Resources/Private/Language/locallang_tca.xml:clientip',
+		'exclude' => '1',
+		'config' => array(
+			'type' => 'input',
+			'readOnly' => TRUE,
+			'size' => '40',
+			'eval' => 'trim',
+			'max'  => '255'
+		)
+	),
+	'time_subscription' => array(
+		'label' => 'LLL:EXT:dmail_management/Resources/Private/Language/locallang_tca.xml:time_subscription',
+		'exclude' => '1',
+		'config' => array(
+			'type' => 'input',
+			'readOnly' => TRUE,
+			'size' => 8,
+			'max' => 20,
+			'eval' => 'datetime',
+			'default' => 0,
+		)
+	),
+	'time_sendsubscriptionmail' => array(
+		'label' => 'LLL:EXT:dmail_management/Resources/Private/Language/locallang_tca.xml:time_sendsubscriptionmail',
+		'exclude' => '1',
+		'config' => array(
+			'type' => 'input',
+			'readOnly' => TRUE,
+			'size' => 8,
+			'max' => 20,
+			'eval' => 'datetime',
+			'default' => 0,
+		)
+	),
+	'time_approvesubscription' => array(
+		'label' => 'LLL:EXT:dmail_management/Resources/Private/Language/locallang_tca.xml:time_approvesubscription',
+		'exclude' => '1',
+		'config' => array(
+			'type' => 'input',
+			'readOnly' => TRUE,
+			'size' => 8,
+			'max' => 20,
+			'eval' => 'datetime',
+			'default' => 0,
+		)
+	),
+);
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_address', $tt_address_cols);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCATypes('tt_address', 'clientip, time_subscription, time_sendsubscriptionmail, time_approvesubscription', '', 'after:module_sys_dmail_category');

@@ -43,6 +43,26 @@ class Subscriber extends \TYPO3\TtAddress\Domain\Model\Address {
 	protected $hidden = TRUE;
 
 	/**
+	 * @var string
+	 */
+	protected $clientip = '';
+
+	/**
+	 * @var string
+	 */
+	protected $timeSubscription;
+
+	/**
+	 * @var string
+	 */
+	protected $timeSendsubscriptionmail;
+
+	/**
+	 * @var string
+	 */
+	protected $timeApprovesubscription;
+
+	/**
 	 * @return boolean
 	 */
 	public function isModuleSysDmailHtml() {
@@ -79,5 +99,61 @@ class Subscriber extends \TYPO3\TtAddress\Domain\Model\Address {
 
 		$fullname = implode(' '. $name);
 		return $fullname;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getClientip() {
+		return $this->clientip;
+	}
+
+	/**
+	 * @param string $clientip
+	 */
+	public function setClientip($clientip) {
+		$this->clientip = $clientip;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTimeSubscription() {
+		return $this->timeSubscription;
+	}
+
+	/**
+	 *
+	 */
+	public function setTimeSubscription() {
+		$this->timeSubscription = time();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTimeSendsubscriptionmail() {
+		return $this->timeSendsubscriptionmail;
+	}
+
+	/**
+	 *
+	 */
+	public function setTimeSendsubscriptionmail() {
+		$this->timeSendsubscriptionmail = time();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTimeApprovesubscription() {
+		return $this->timeApprovesubscription;
+	}
+
+	/**
+	 *
+	 */
+	public function setTimeApprovesubscription() {
+		$this->timeApprovesubscription = time();
 	}
 }

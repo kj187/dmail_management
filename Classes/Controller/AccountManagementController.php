@@ -108,10 +108,16 @@ class AccountManagementController extends ActionController {
 			$this->forward('subscription', NULL, NULL, array('subscriber' => $subscriber, 'error' => $error));
 		}
 		$subscriber->setHidden(TRUE);
+		$subscriber->setTimeSubscription();
+		$subscriber->setClientip($_SERVER['REMOTE_ADDR']);
 		$this->subscriberRepository->add($subscriber);
 		$this->persistenceManager->persistAll();
+
 		$authCode = $this->getSubscriberAuthCode($subscriber);
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterPersistence', array($subscriber, $authCode, $this->settings));
+		$subscriber->setTimeSendsubscriptionmail();
+		$this->subscriberRepository->update($subscriber);
+
 		$this->redirect('', NULL, NULL, NULL, $this->settings['subscription']['confirmation']['redirectPage']);
 	}
 
@@ -127,6 +133,7 @@ class AccountManagementController extends ActionController {
 			}
 			$this->checkSubscriberAuthCode($authCode, $subscriber);
 			$subscriber->setHidden(FALSE);
+			$subscriber->setTimeApprovesubscription();
 			$this->subscriberRepository->update($subscriber);
 		} catch(\Exception $exception) {
 			$this->errorHandler($exception);
@@ -143,7 +150,7 @@ class AccountManagementController extends ActionController {
 		try {
 			$subscriber = $this->getSubscriberFromUid($subscriber);
 			$this->checkSubscriberAuthCode($authCode, $subscriber);
-			$this->subscriberRepository->remove($subscriber);
+			$GLOBALS['TYPO3_DB']->exec_DELETEquery('tt_address', 'uid = ' . $subscriber->getUid());
 		} catch(\Exception $exception) {
 			$this->errorHandler($exception);
 		}

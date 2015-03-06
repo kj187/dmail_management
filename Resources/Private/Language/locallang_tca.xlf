@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-03-02T16:02:42Z" product-name="dmail_management">
+		<header/>
+		<body>
+			<trans-unit id="clientip">
+				<source>Client IP</source>
+			</trans-unit>
+			<trans-unit id="time_subscription">
+				<source>Time of subscription</source>
+			</trans-unit>
+			<trans-unit id="time_sendsubscriptionmail">
+				<source>Time of sending subscription confirmation</source>
+			</trans-unit>
+			<trans-unit id="time_approvesubscription">
+				<source>Time of subscription approvment by user</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
