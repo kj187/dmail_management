@@ -1,4 +1,5 @@
 <?php
+namespace Aijko\DmailManagement\Hooks;
 
 /***************************************************************
  *
@@ -25,29 +26,42 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+/**
+ * Class Marker
+ * @package Aijko\DmailManagement\Hooks
+ */
+class Marker {
+
+	/**
+	 * Replace markers inside the templates
+	 *
+	 * @param array $params
+	 * @param \DirectMailTeam\DirectMail\Dmailer $dmailer
+	 * @return array
+	 */
+	function replaceMarker(array &$params, \DirectMailTeam\DirectMail\Dmailer $dmailer) {
+		$fullname = $this->getName($params['row']);
+		$params['markers']['Guten Tag,'] = ($fullname ? 'Guten Tag ' . $fullname . ',' : 'Guten Tag,');
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName($row) {
+		$name = array();
+
+		if ($row['first_name']) {
+			$name[] = $row['first_name'];
+		}
+		if ($row['last_name']) {
+			$name[] = $row['last_name'];
+		}
+
+		if (!count($name)) {
+			return '';
+		}
+
+		$fullname = implode(' ', $name);
+		return $fullname;
+	}
 }
-
-// Configure plugin
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'Aijko.' . $_EXTKEY,
-	'Accountmanagement',
-	array(
-		'AccountManagement' => 'subscription, create, activate, unsubscribe',
-		
-	),
-	// non-cacheable actions
-	array(
-		'AccountManagement' => 'subscription, create, activate, unsubscribe',
-		
-	)
-);
-
-// Register signal slot
-$signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
-$signalSlotDispatcher->connect('Aijko\\DmailManagement\\Controller\\AccountManagementController', 'createActionAfterPersistence', 'Aijko\\DmailManagement\\Service\\NotificationService', 'subscriptionSuccess');
-unset($signalSlotDispatcher);
-
-// Register Hooks
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/direct_mail']['res/scripts/class.dmailer.php']['mailMarkersHook'][] = '\Aijko\DmailManagement\Hooks\Marker->replaceMarker';

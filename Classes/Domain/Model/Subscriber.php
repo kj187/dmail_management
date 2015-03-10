@@ -94,10 +94,20 @@ class Subscriber extends \TYPO3\TtAddress\Domain\Model\Address {
 	 * @return string
 	 */
 	public function getName() {
-		$name[] = $this->getFirstName();
-		$name[] = $this->getLastName();
+		$name = array();
 
-		$fullname = implode(' '. $name);
+		if ($this->getFirstName()) {
+			$name[] = $this->getFirstName();
+		}
+		if ($this->getLastName()) {
+			$name[] = $this->getLastName();
+		}
+
+		if (!count($name)) {
+			return '';
+		}
+
+		$fullname = implode(' ', $name);
 		return $fullname;
 	}
 
